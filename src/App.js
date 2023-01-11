@@ -5,48 +5,52 @@ import ObjectInfo from "./components/ObjectInfo";
 
 function App() {
 
-    const [leftarr, setlarr] = useState([]);
-    const [rightarr, setrarr] = useState([]);
+    const [leftArr, setLArr] = useState([]);
+    const [rightArr, setRArr] = useState([]);
     const [ backgroundColor, setBackgroundColor ] = useState('#50e3e3');
 
     useEffect(() => {
         const dataJSON = require('./MOCK_DATA.json');
-        setlarr(dataJSON);
-        console.log(leftarr.length);
+        setLArr(dataJSON);
+        //console.log(leftArr.length);
     }, [])
 
     useEffect(() => {
-        if(rightarr.length >= 10){
+        if(rightArr.length >= 10){
             setBackgroundColor('#db6fe8');
         }else{
             setBackgroundColor('#50e3e3');
         }
 
-    }, [rightarr])
+    }, [rightArr])
 
     function onItemPress({side, id, gender}) {
-        if (side === 'Left') {
+        if (side === 'left') {
             if (conditionCheck(gender)) {
-                const from = {arr: leftarr, setArr: setlarr};
-                const to = {arr: rightarr, setArr: setrarr};
+                const from = {arr: leftArr, setArr: setLArr};
+                const to = {arr: rightArr, setArr: setRArr};
                 moveElement({id, from, to});
             } else {
-                alert('Max 5 male and 5 female on right side');
+                //in this case we have gender only male/female
+                if (gender === 'Male') {
+                    alert('Max 5 male on right side')
+                } else {
+                    alert('Max 5 female on right side')
+                }
             }
         } else {
-            const from = {arr: rightarr, setArr: setrarr};
-            const to = {arr: leftarr, setArr: setlarr};
+            const from = {arr: rightArr, setArr: setRArr};
+            const to = {arr: leftArr, setArr: setLArr};
             moveElement({id, from, to});
         }
     }
 
     function conditionCheck(gender) {
-        let checkState = true;
         if (gender === 'Male' || gender === 'Female') {
-            const checkArr = rightarr.filter(item => item.gender === gender);
-            if(checkArr.length===5){checkState = false}
+            const checkArr = rightArr.filter(item => item.gender === gender);
+            return checkArr.length !== 5
         }
-        return checkState
+        return true
     }
 
     function moveElement({id,from,to}){
@@ -63,11 +67,11 @@ function App() {
     }
 
     return <div className="App">
-        <ul className="List" id="LList">
-            {leftarr.map(item=> <ObjectInfo arrangement={item} onItemPress={onItemPress} side='Left' />)}
+        <ul className="list" id="LList">
+            {leftArr.map(item=> <ObjectInfo arrangement={item} onItemPress={onItemPress} side='left' />)}
         </ul>
-        <ul className="List" id="RList">
-            {rightarr.map(item=> <ObjectInfo arrangement={item} onItemPress={onItemPress} side='Right' style={{'background':backgroundColor}}/>)}
+        <ul className="list" id="RList">
+            {rightArr.map(item=> <ObjectInfo arrangement={item} onItemPress={onItemPress} side='right' style={{'background':backgroundColor}}/>)}
         </ul>
     </div>
 }

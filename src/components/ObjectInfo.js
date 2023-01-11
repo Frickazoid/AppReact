@@ -1,28 +1,28 @@
 function ObjectInfo({arrangement, onItemPress, side, style}) {
 
-    function onPress({idbtn, gender:gender }) {
+    function onPress({idbtn, gender }) {
         onItemPress({side, id:idbtn, gender:gender});
     }
 
     return (
-        <li className={'UserInfo'+side} style={style}>
-            <div className="Flex-container">
-                <div className="Flex-info-container">
-                    <div className="UserFName">
+        <li className={`user-info--${side}`} style={style}>
+            <div className="flex-container">
+                <div className="flex-info-container">
+                    <div className="user-name">
                         {arrangement.id}. {arrangement.last_name} {arrangement.first_name}
                     </div>
-                    <div className="UserEmail">
+                    <div className="user-email">
                         Email: {arrangement.email}
                     </div>
-                    <div className="UserGender">
+                    <div className="user-gender">
                         Gender: {arrangement.gender}
                     </div>
-                    <div className="UserCity">
+                    <div className="user-city">
                         City: {arrangement.city}
                     </div>
                 </div>
-                <div className="Flex-btn-container">
-                    <button className="MoveBtn"
+                <div className="flex-btn-container">
+                    <button className="move-btn"
                             onClick={() => onPress({idbtn: arrangement.id, gender: arrangement.gender})}>
                         Move
                     </button>
