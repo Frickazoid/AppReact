@@ -1,0 +1,51 @@
+.list {
+    width:400px;
+    background: #9ee1e1;
+    float:left;
+    margin: 0 15px 15px 0;
+    text-align:center;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.user-info--left {
+    background: #50e3e3;
+    border-radius: 15px;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px; /* Расстояние снизу */
+}
+
+.user-info--right {
+    border-radius: 15px;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px; /* Расстояние снизу */
+}
+
+.move-btn{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.move-btn:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-btn-container{
+    flex-grow: 2;
+}
+
+.flex-info-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 8
+}
